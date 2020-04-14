@@ -6,7 +6,8 @@
           <div class="text-h6 text-weight-bold">{{getName}}</div>
         </div>
         <div class="col-auto">
-          <q-btn :to="getUrl" color="accent" dense flat icon-right="eva-arrow-forward-outline" no-caps label="Explore" size="md" class="text-weight-bold"/>
+          <q-btn :to="getUrl" color="accent" dense flat icon-right="eva-arrow-forward-outline" no-caps label="Explore"
+                 size="md" class="text-weight-bold"/>
         </div>
       </div>
     </q-card-section>
@@ -20,7 +21,7 @@
         <div class="col-12 col-sm-6">
           <q-list>
             <q-item class="label-state">
-              <q-item-section avatar>
+              <q-item-section avatar v-bind:class="{'no-items' : getSuccess() === 0 }">
                 <avatar-state state="positive"/>
               </q-item-section>
               <q-item-section class="label-state-text">
@@ -32,7 +33,7 @@
               </q-item-section>
             </q-item>
             <q-item class="label-state">
-              <q-item-section avatar>
+              <q-item-section avatar v-bind:class="{'no-items' : getWarnings() === 0 }">
                 <avatar-state state="warning"/>
               </q-item-section>
               <q-item-section class="label-state-text">
@@ -44,7 +45,7 @@
               </q-item-section>
             </q-item>
             <q-item class="label-state">
-              <q-item-section avatar>
+              <q-item-section avatar v-bind:class="{'no-items' : getErrors() === 0 }">
                 <avatar-state state="negative"/>
               </q-item-section>
               <q-item-section class="label-state-text">
@@ -177,27 +178,35 @@ export default {
 <style scoped lang="scss">
   @import "../../css/sass/variables";
 
+  .no-items {
+    opacity: 0.3;
+  }
+
   .label-state {
     min-height: 32px;
     padding: 8px;
-    .q-item__section--avatar{
+
+    .q-item__section--avatar {
       min-width: 32px;
       padding: 0 8px 0 0;
     }
-    &-text{
-      .q-item__label{
+
+    &-text {
+      .q-item__label {
         font-size: 16px;
         line-height: 16px !important;
         font-weight: 600;
       }
-      .q-item__label--caption{
+
+      .q-item__label--caption {
         font-size: 14px;
         line-height: 14px !important;
         font-weight: 500;
         color: $app-text-grey;
       }
     }
-    &-side{
+
+    &-side {
       font-size: 22px;
       font-weight: 700;
       padding: 0 0 0 8px;
